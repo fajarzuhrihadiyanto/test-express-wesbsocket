@@ -1,0 +1,14 @@
+		{
+			status: ‘success’,
+			data: {
+room_code: string,
+				creator: string (id dari client socket),
+				players: [
+					{
+						id: string (id dari client socket),
+						username: string (username input dari fe)
+					},
+					…
+				]
+			}
+		}

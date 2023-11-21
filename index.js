@@ -230,13 +230,17 @@ io.on('connection', (socket) => {
   socket.on('chat', (roomCode, content, callback) => {
 
     const user = roomConfig[roomCode].users.find(user => user.id === socket.id)
-    roomConfig[roomCode].messages.push({
+    const newMessage = {
       type: 'chat',
       user: socket.id,
       content
-    })
-    socket.to(roomCode).emit('new chat', roomConfig[roomCode])
-    callback(roomConfig[roomCode])
+    }
+    roomConfig[roomCode].messages.push(newMessage)
+    // socket.to(roomCode).emit('new chat', roomConfig[roomCode])
+    // callback(roomConfig[roomCode])
+
+    socket.to(roomCode).emit('new chat', newMessage)
+    callback(newMessage)
 
     console.log(`${socket.id} give message to room ${roomCode}`)
   })
